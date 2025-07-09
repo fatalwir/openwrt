@@ -273,6 +273,14 @@ define Device/hak5_wifi-pineapple-mk7
 endef
 TARGET_DEVICES += hak5_wifi-pineapple-mk7
 
+define Device/hapcan_interface
+  IMAGE_SIZE := 32448k
+  DEVICE_VENDOR := HAPCAN
+  DEVICE_MODEL := Ethernet Interface
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci
+endef
+TARGET_DEVICES += hapcan_interface
+
 define Device/hilink_hlk-7628n
   IMAGE_SIZE := 32448k
   DEVICE_VENDOR := HILINK

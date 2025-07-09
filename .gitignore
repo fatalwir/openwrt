@@ -3,10 +3,23 @@
 .*.swp
 /env
 /dl
-#/.config # HAPCAN hardware specific config
+
+# HAPCAN specific config
+#/.config
+
 /.config.old
 /.toolchain_build_ver
-/bin
+
+/bin/*
+# Make the built system binary available
+!/bin/targets/
+!/bin/targets/ramips/
+/bin/targets/ramips/mt76x8/*
+!/bin/targets/ramips/mt76x8/
+!/bin/targets/ramips/mt76x8/*.bin
+!/bin/targets/ramips/mt76x8/*.manifest
+!/bin/targets/ramips/mt76x8/*.buildinfo
+
 /build_dir
 /staging_dir
 /tmp

@@ -285,7 +285,7 @@ define Device/hapcan_interface
     CONFIG_RTC_CLASS=y \
     CONFIG_RTC_DRV_BQ32K=y \
     CONFIG_IIO=y \
-    CONFIG_MCP3422=y \
+    CONFIG_MCP3422=y
 endef
 TARGET_DEVICES += hapcan_interface
 

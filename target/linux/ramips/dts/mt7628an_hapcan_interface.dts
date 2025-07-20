@@ -8,4 +8,15 @@
 
 &i2c {
 	status = "okay";
+
+	rtc@68 {
+		compatible = "ti,bq32000";
+		reg = <0x68>;
+	};
+
+	adc@0 {
+		compatible = "microchip,mcp3424";
+		reg = <0x68>;
+	};
+
 };

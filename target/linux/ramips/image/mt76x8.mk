@@ -277,7 +277,12 @@ define Device/hapcan_interface
   IMAGE_SIZE := 32448k
   DEVICE_VENDOR := HAPCAN
   DEVICE_MODEL := Ethernet Interface
-  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-usb-acm kmod-can kmod-can-raw kmod-can-slcan
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-usb-acm \
+    kmod-can kmod-can-raw kmod-can-slcan
+  KCONFIG:=CONFIG_RTC_CLASS=y \
+    CONFIG_RTC_I2C_AND_SPI=y \
+    CONFIG_RTC_DRV_BQ32K=y \
+    CONFIG_MCP3422=y
 endef
 TARGET_DEVICES += hapcan_interface
 

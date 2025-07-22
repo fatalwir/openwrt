@@ -1,0 +1,22 @@
+#include "mt7628an_hilink_hlk-7628n.dts"
+
+&{/} {
+	compatible = "hapcan,interface", "hilink,hlk-7628n", "mediatek,mt7628an-soc";
+	model = "HAPCAN Ethernet Interface";
+};
+
+
+&i2c {
+	status = "okay";
+
+	rtc@68 {
+		compatible = "ti,bq32000";
+		reg = <0x68>;
+	};
+
+	adc@6e {
+	    compatible = "microchip,mcp3422";
+	    reg = <0x6E>;
+	};
+
+};

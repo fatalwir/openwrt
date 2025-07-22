@@ -273,6 +273,23 @@ define Device/hak5_wifi-pineapple-mk7
 endef
 TARGET_DEVICES += hak5_wifi-pineapple-mk7
 
+define Device/hapcan_interface
+  IMAGE_SIZE := 32448k
+  DEVICE_VENDOR := HAPCAN
+  DEVICE_MODEL := Ethernet Interface
+  SUPPORTED_DEVICES += hilink,hlk-7628n
+  DEVICE_PACKAGES := \
+    kmod-usb2 kmod-usb-ohci kmod-usb-acm \
+    kmod-can kmod-can-raw kmod-can-slcan canutils-slcand
+endef
+TARGET_DEVICES += hapcan_interface
+#  KCONFIG:= \
+    CONFIG_I2C=y \
+    CONFIG_RTC_CLASS=y \
+    CONFIG_RTC_DRV_BQ32K=y \
+    CONFIG_IIO=y \
+    CONFIG_MCP3422=y
+
 define Device/hilink_hlk-7628n
   IMAGE_SIZE := 32448k
   DEVICE_VENDOR := HILINK

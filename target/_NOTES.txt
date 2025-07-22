@@ -1,0 +1,23 @@
+config device
+        option name 'br-lan'
+        option type 'bridge'
+        list ports 'eth0.1'
+
+config interface 'lan'
+        option device 'br-lan'
+        option proto 'static'
+        option ipaddr '192.168.1.1'
+        option netmask '255.255.255.0'
+        option ip6assign '60'
+
+config interface 'lan_dhcp'
+        option device 'br-lan'
+        option proto 'dhcp'
+
+
+
+TODO:
+    check why there is no I2C in the /proc/device-tree
+    test slcand if it works automatically
+    add network configuration (static IP + dhcp client + without dhcp server)
+    remove KCONFIG comment in the mt76x8.mk

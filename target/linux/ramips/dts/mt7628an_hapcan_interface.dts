@@ -5,6 +5,12 @@
 	model = "HAPCAN Ethernet Interface";
 };
 
+&state_default {
+	i2c {
+		groups = "i2c";
+		function = "i2c";
+	};
+};
 
 &i2c {
 	status = "okay";

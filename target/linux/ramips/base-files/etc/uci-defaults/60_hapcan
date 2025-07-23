@@ -1,0 +1,52 @@
+
+. /lib/functions.sh
+
+board=$(board_name)
+
+case "$board" in
+  hapcan,interface)
+
+    echo "Configuring custom Hapcan UCI defaults..."
+
+    ## Set hostname
+    uci set system.@system[0].hostname='hapcan'
+    uci commit system
+
+    ## Remove default LAN interface (cleanup defaults)
+    uci delete network.lan 2>/dev/null
+
+    ## Create bridge interface
+    uci set network.device='br-lan'
+    uci set network.device.type='bridge'
+    uci add_list network.device.ports='eth0'
+
+    ## Static IP interface on br-lan
+    uci set network.lan=interface
+    uci set network.lan.device='br-lan'
+    uci set network.lan.proto='static'
+    uci set network.lan.ipaddr='192.168.1.1'
+    uci set network.lan.netmask='255.255.255.0'
+    #uci set network.lan.ip6assign='60'
+
+    ## DHCP fallback interface
+    uci set network.lan_dhcp=interface
+    uci set network.lan_dhcp.device='br-lan'
+    uci set network.lan_dhcp.proto='dhcp'
+
+    uci commit network
+
+
+
+    # Disable DHCP server
+    uci set dhcp.lan.ignore="1"
+
+    # Disable DNS
+    uci set dhcp.@dnsmasq[0].localuse="0"
+    uci set dhcp.@dnsmasq[0].port="0"
+    uci set dhcp.lan.dns_service="0"
+    uci set dhcp.lan.ra_dns="0"
+    
+    uci commit dhcp
+
+    ;;
+esac

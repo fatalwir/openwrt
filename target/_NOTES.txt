@@ -15,6 +15,15 @@ config interface 'lan_dhcp'
         option proto 'dhcp'
 
 
+scp bin/targets/ramips/mt76x8/openwrt-ramips-mt76x8-hilink_hlk-7628n-squashfs-sysupgrade.bin  root@192.168.33.198:/tmp
+
+
+./scripts/feeds update -a
+./scripts/feeds install -a
+make menuconfig
+make -j16 defconfig download clean world
+
+
 
 TODO:
     TEST check why there is no I2C in the /proc/device-tree (maybe because the pin group was set to gpio mode?)
@@ -24,3 +33,4 @@ TODO:
     make testing package in C using the interface (eth hapcan <-> can hapcan)
     avahi/mdns misto dualni ip konfigurace?
     remove KCONFIG comment in the mt76x8.mk
+

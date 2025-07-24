@@ -27,10 +27,16 @@ opkg install openssh-sftp-server
 
 
 TODO:
-    TEST check why there is no I2C in the /proc/device-tree (the pin group looks to be set correctly)
+    TEST check the I2C pin collision (see below)
     TEST slcand if it works automatically - it does not 
     TEST if two processes can use can0 simultaneously
     make testing package in C using the interface (eth hapcan <-> can hapcan)
     avahi/mdns misto dualni ip konfigurace?
-    remove KCONFIG comment in the mt76x8.mk
 
+
+
+[  120.217564] i2c_dev: i2c /dev entries driver
+[  120.290489] mt76x8-pinctrl pinctrl: pin io4 already requested by pinctrl; cannot claim for 10000900.i2c
+[  120.309213] mt76x8-pinctrl pinctrl: pin-4 (10000900.i2c) status -22
+[  120.321653] mt76x8-pinctrl pinctrl: could not request pin 4 (io4) from group i2c  on device mtmips-pinctrl
+[  120.340821] i2c-mt7621 10000900.i2c: Error applying setting, reverse things back

@@ -284,14 +284,6 @@ define Device/hapcan_interface
     kmod-i2c-core kmod-i2c-mt7628 kmod-iio-core kmod-iio-mcp3422 kmod-rtc-bq32k
 endef
 TARGET_DEVICES += hapcan_interface
-#  KCONFIG:= \
-#    CONFIG_I2C=y \
-#    CONFIG_RTC_CLASS=y \
-#    CONFIG_RTC_DRV_BQ32K=y \
-#    CONFIG_IIO=y \
-#    CONFIG_MCP3422=y
-#  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | check-size | append-metadata
-#
 
 define Device/hilink_hlk-7628n
   IMAGE_SIZE := 32448k

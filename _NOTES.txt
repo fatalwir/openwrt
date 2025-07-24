@@ -23,13 +23,13 @@ scp bin/targets/ramips/mt76x8/openwrt-ramips-mt76x8-hilink_hlk-7628n-squashfs-sy
 make menuconfig
 make -j16 defconfig download clean world
 
+opkg install openssh-sftp-server
 
 
 TODO:
-    TEST check why there is no I2C in the /proc/device-tree (maybe because the pin group was set to gpio mode?)
-    TEST slcand if it works automatically
+    TEST check why there is no I2C in the /proc/device-tree (the pin group looks to be set correctly)
+    TEST slcand if it works automatically - it does not 
     TEST if two processes can use can0 simultaneously
-    TEST - CHECK IF UCI DEFAULTS WORK (static ip + dhcp client, hostname) (target/linux/ramips/base-files/etc/uci-defaults/50_hapcan)
     make testing package in C using the interface (eth hapcan <-> can hapcan)
     avahi/mdns misto dualni ip konfigurace?
     remove KCONFIG comment in the mt76x8.mk

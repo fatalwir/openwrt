@@ -1,7 +1,7 @@
 #include "mt7628an_hilink_hlk-7628n.dts"
 
 &{/} {
-	compatible = "hapcan,interface", "hilink,hlk-7628n", "mediatek,mt7628an-soc";
+	compatible = "hapcan,interface";
 	model = "HAPCAN Ethernet Interface";
 };
 

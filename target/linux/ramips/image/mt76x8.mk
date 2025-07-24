@@ -280,15 +280,16 @@ define Device/hapcan_interface
   SUPPORTED_DEVICES := hapcan,interface hilink,hlk-7628n
   DEVICE_PACKAGES := \
     kmod-usb2 kmod-usb-ohci kmod-usb-acm \
-    kmod-can kmod-can-raw kmod-can-slcan canutils canutils-slcand
-  KCONFIG:= \
-    CONFIG_I2C=y \
-    CONFIG_RTC_CLASS=y \
-    CONFIG_RTC_DRV_BQ32K=y \
-    CONFIG_IIO=y \
-    CONFIG_MCP3422=y
+    kmod-can kmod-can-raw kmod-can-slcan canutils canutils-slcand \
+    kmod-i2c-core kmod-i2c-mt7628 kmod-iio-core kmod-iio-mcp3422 rtc-bq32k
 endef
 TARGET_DEVICES += hapcan_interface
+#  KCONFIG:= \
+#    CONFIG_I2C=y \
+#    CONFIG_RTC_CLASS=y \
+#    CONFIG_RTC_DRV_BQ32K=y \
+#    CONFIG_IIO=y \
+#    CONFIG_MCP3422=y
 #  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | check-size | append-metadata
 #
 

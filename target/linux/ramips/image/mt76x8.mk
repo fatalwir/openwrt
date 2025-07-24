@@ -277,12 +277,13 @@ define Device/hapcan_interface
   IMAGE_SIZE := 32448k
   DEVICE_VENDOR := HAPCAN
   DEVICE_MODEL := Ethernet Interface
-  SUPPORTED_DEVICES += hapcan,interface hilink,hlk-7628n 
+  SUPPORTED_DEVICES := hapcan,interface hilink,hlk-7628n
   DEVICE_PACKAGES := \
     kmod-usb2 kmod-usb-ohci kmod-usb-acm \
     kmod-can kmod-can-raw kmod-can-slcan canutils-slcand 
 endef
 TARGET_DEVICES += hapcan_interface
+#  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | check-size | append-metadata
 #  KCONFIG:= \
     CONFIG_I2C=y \
     CONFIG_RTC_CLASS=y \

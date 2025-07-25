@@ -25,11 +25,13 @@ make -j16 defconfig download clean world
 
 opkg install openssh-sftp-server
 
+After RTC oscillator failure, the OF flag needs to be reset: hwclock --systohc --rtc=/dev/rtc0
+
 
 TODO:
-    TEST check the I2C pin collision (see below)
-    TEST slcand if it works automatically - it does not 
+    TEST slcand if it works automatically - it does not (ttyACM0 appears before the slcan module is loaded, maybe that is a problem?)
     TEST if two processes can use can0 simultaneously
+    RTC works, after starting/restarting oscillator it needs to be reset. somehow make it automatic? ntp?
     make testing package in C using the interface (eth hapcan <-> can hapcan)
     avahi/mdns misto dualni ip konfigurace?
     nedulezite, vyresit "OF: Bad cell count for ..."

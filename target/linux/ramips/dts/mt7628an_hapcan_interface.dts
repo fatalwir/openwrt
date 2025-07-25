@@ -6,10 +6,10 @@
 };
 
 &state_default {
-	i2c {
-		groups = "i2c";
-		function = "i2c";
-	};
+	// Override GPIO assignment from the mt7628an_hilink_hlk-7628n.dts
+	/delete-node/ gpio;
+
+	// I2C assignment is done by the i2c-mt7621 kernel module at boot
 };
 
 &i2c {

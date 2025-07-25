@@ -32,6 +32,7 @@ TODO:
     TEST if two processes can use can0 simultaneously
     make testing package in C using the interface (eth hapcan <-> can hapcan)
     avahi/mdns misto dualni ip konfigurace?
+    nedulezite, vyresit "OF: Bad cell count for ..."
 
 
 

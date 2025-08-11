@@ -31,15 +31,35 @@ After RTC oscillator failure, the OF flag needs to be reset: hwclock --systohc -
 TODO:
     TEST slcand if it works automatically - it does not (ttyACM0 appears before the slcan module is loaded, maybe that is a problem?)
     TEST if two processes can use can0 simultaneously
-    RTC works, after starting/restarting oscillator it needs to be reset. somehow make it automatic? ntp?
+    RTC works, after starting/restarting oscillator it needs to be reset. somehow make it automatic? ntp? (see below)
     make testing package in C using the interface (eth hapcan <-> can hapcan)
     avahi/mdns misto dualni ip konfigurace?
     nedulezite, vyresit "OF: Bad cell count for ..."
 
 
 
-[  120.217564] i2c_dev: i2c /dev entries driver
-[  120.290489] mt76x8-pinctrl pinctrl: pin io4 already requested by pinctrl; cannot claim for 10000900.i2c
-[  120.309213] mt76x8-pinctrl pinctrl: pin-4 (10000900.i2c) status -22
-[  120.321653] mt76x8-pinctrl pinctrl: could not request pin 4 (io4) from group i2c  on device mtmips-pinctrl
-[  120.340821] i2c-mt7621 10000900.i2c: Error applying setting, reverse things back
+
+
+----------------------- RTC automatic ----------------------
+code by chatgpt, the reset command was different one, see above
+
+/etc/init.d/rtc-osf-fix
+
+#!/bin/sh /etc/rc.common
+START=99
+start() {
+    I2CBUS=0        # change if needed
+    ADDR=0x68
+
+    STATUS=$(i2cget -y $I2CBUS $ADDR 0x0F)
+    if [ $((STATUS & 0x80)) -ne 0 ]; then
+        logger -t rtc-osf "RTC OSF flag set, resetting time"
+        # Wait for NTP to set system time
+        sleep 5
+        hwclock --systohc
+    fi
+}
+
+
+chmod +x /etc/init.d/rtc-osf-fix
+/etc/init.d/rtc-osf-fix enable

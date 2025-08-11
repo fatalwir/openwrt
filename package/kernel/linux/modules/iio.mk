@@ -129,12 +129,11 @@ endef
 $(eval $(call KernelPackage,iio-ads1015))
 
 define KernelPackage/iio-mcp3422
-  DEPENDS:=+kmod-i2c-core
   TITLE:=Microchip MCP342x ADC driver
   KCONFIG:=CONFIG_MCP3422
   FILES:=$(LINUX_DIR)/drivers/iio/adc/mcp3422.ko
-  AUTOLOAD:=$(call AutoLoad,56,mcp3422)
-  $(call AddDepends/iio)
+  AUTOLOAD:=$(call AutoProbe,mcp3422)
+  $(call AddDepends/iio, +kmod-i2c-core)
 endef
 
 define KernelPackage/iio-mcp3422/description

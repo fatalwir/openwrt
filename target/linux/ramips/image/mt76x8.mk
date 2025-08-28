@@ -281,7 +281,9 @@ define Device/hapcan_interface
   DEVICE_PACKAGES := \
     kmod-usb2 kmod-usb-ohci kmod-usb-acm \
     kmod-can kmod-can-raw kmod-can-slcan canutils canutils-slcand \
-    kmod-i2c-core kmod-i2c-mt7628 kmod-iio-core kmod-iio-mcp3422 kmod-rtc-bq32k
+    kmod-i2c-core kmod-i2c-mt7628 kmod-iio-core kmod-iio-mcp3422 kmod-rtc-bq32k \
+    libgpiod gpiod-tools \
+    openssh-sftp-server
 endef
 TARGET_DEVICES += hapcan_interface
 

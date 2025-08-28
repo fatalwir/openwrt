@@ -16,12 +16,14 @@
 	status = "okay";
 
 	rtc@68 {
+		// linux/drivers/rtc/rtc-bq32k.c
 		compatible = "ti,bq32000";
 		reg = <0x68>;
 	};
 
 	adc@6e {
-	    compatible = "microchip,mcp3422";
+		// linux/drivers/iio/adc/mcp3422.c
+	    compatible = "mcp3422";
 	    reg = <0x6E>;
 	};
 

@@ -15,7 +15,9 @@ config interface 'lan_dhcp'
         option proto 'dhcp'
 
 
-scp bin/targets/ramips/mt76x8/openwrt-ramips-mt76x8-hilink_hlk-7628n-squashfs-sysupgrade.bin  root@192.168.33.198:/tmp
+scp bin/targets/ramips/mt76x8/openwrt-ramips-mt76x8-hapcan_interface-squashfs-sysupgrade.bin  root@192.168.33.198:/tmp
+
+sysupgrade -v /tmp/openwrt-ramips-mt76x8-hapcan_interface-squashfs-sysupgrade.bin
 
 
 ./scripts/feeds update -a
@@ -35,6 +37,7 @@ TODO:
     make testing package in C using the interface (eth hapcan <-> can hapcan)
     avahi/mdns misto dualni ip konfigurace?
     nedulezite, vyresit "OF: Bad cell count for ..."
+    ADC works, see below
 
 
 
@@ -63,3 +66,34 @@ start() {
 
 chmod +x /etc/init.d/rtc-osf-fix
 /etc/init.d/rtc-osf-fix enable
+
+
+
+----------------------- ADC Readout ------------------------------
+while true; do
+    echo ""
+
+    raw1=$(cat /sys/bus/iio/devices/iio:device0/in_voltage0_raw)
+    scale1=$(cat /sys/bus/iio/devices/iio:device0/in_voltage0_scale)
+    voltage1=$(awk "BEGIN {printf \"%.2f\", $raw1 * $scale1 * 16}")
+    echo "VBUS: $voltage1 V"
+
+    raw2=$(cat /sys/bus/iio/devices/iio:device0/in_voltage1_raw)
+    scale2=$(cat /sys/bus/iio/devices/iio:device0/in_voltage1_scale)
+    voltage2=$(awk "BEGIN {printf \"%.2f\", $raw2 * $scale2 * 2.022}")
+    echo "VBAT: $voltage2 V"
+    sleep 1
+done
+
+
+
+-------------------------- GPIO -----------------------------
+opkg install libgpiod gpiod-tools
+
+gpioget -c 0 11
+
+disable and enable Vbat voltage divider:
+gpioset -c 0 11=0
+gpioset -c 0 11=1
+
+(gpiochip0, line 11)

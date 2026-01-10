@@ -6,7 +6,7 @@ WORKDIR /home/buildbot
 USER buildbot
 
 # Clone OpenWrt with hapcan branch
-RUN git clone -b hapcan https://github.com/fatalwir/openwrt.git
+RUN git clone -b k01_hapcan_podman https://github.com/fatalwir/openwrt.git
 
 WORKDIR /home/buildbot/openwrt
 

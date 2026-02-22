@@ -22,12 +22,23 @@ sysupgrade -v /tmp/openwrt-ramips-mt76x8-hapcan_interface-squashfs-sysupgrade.bi
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
+
+./scripts/feeds update pahomqtt
+./scripts/feeds update hapcan
+./scripts/feeds install paho-mqtt-c
+./scripts/feeds install hmsg
+
 make menuconfig
 make -j16 defconfig download clean world
 
 opkg install openssh-sftp-server
 
 After RTC oscillator failure, the OF flag needs to be reset: hwclock --systohc --rtc=/dev/rtc0
+
+# install  slcand
+opkg update && opkg install canutils-slcand
+slcand -o -c -f -s4 ttyACM0 can0
+ip a - verify can0 adapter is created
 
 
 TODO:
